@@ -1,0 +1,118 @@
+@startuml
+
+entity User {
+  ID : int
+  FirstName : string
+  LastName : string
+  Level : int
+  Point : int
+  Email : string
+  Password : string
+  MobileNo : string
+  Address : string
+}
+
+entity Maps {
+  ID : int
+  Category : string
+  Name : string
+  Description : string
+}
+
+entity Location {
+  ID : int
+  Address : string
+  Name : string
+  Description : string
+}
+
+entity Route {
+  ID : int
+  Level : int
+  Name : string
+  Description : string
+  Origin : string
+  Destination : string
+}
+
+entity RoutePoint {
+  ID : int
+  RouteID : int
+  LocationID : int
+  Sequence : int
+}
+
+entity RouteSegment {
+  ID : int
+  RoutePoint1 : int
+  RoutePoint2 : int
+  Distance : int
+  Time : int
+  Cost : int
+}
+
+entity RoutePlan {
+  ID : int
+  Name : string
+  Description : string
+  Origin : string
+  Destination : string
+  Route : string
+}
+
+entity TrafficStatus {
+  ID : int
+  Level : int
+  RoutePoint1 : int
+  RoutePoint2 : int
+  StatusID : int
+  Time : DateTime
+  Cost : int
+}
+
+entity RouteStat {
+  ID : int
+  RouteID : int
+  RoutePlanID : int
+  UserID : int
+  StartTime : DateTime
+  EndTime : DateTime
+  Distance : int
+  Time : int
+  Cost : int
+}
+
+entity IndividualMap {
+  ID : int
+  UserID : int
+  MapsID : int
+}
+
+entity Tile {
+  ID : int
+  IndividualMapID : int
+  X : int
+  Y : int
+  StatusID : int
+}
+
+entity Status {
+  ID : int
+  Name : string
+  Description : string
+}
+
+User --> Maps
+User --> RoutePlan
+User --> RouteStat
+Location --> RoutePoint
+Route --> RoutePoint
+RoutePoint --> RouteSegment
+RouteSegment --> TrafficStatus
+RoutePlan --> RouteStat
+Maps --> IndividualMap
+IndividualMap --> Tile
+TrafficStatus --> Status
+Tile --> Status
+
+@enduml
